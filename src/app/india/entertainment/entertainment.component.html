@@ -1,0 +1,80 @@
+<!--This template displays entertainment headlines from india-->
+<div class="page"></div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <br>
+      <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-8">
+          <p style="font-size: 32px;font-family: 'Oswald', sans-serif;">Entertainment News</p>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4" style="text-align:right">
+          <div class="dropdown" style="align-self: auto">
+            <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Sub-categories
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <!--linking routes of different components-->
+              <a class="dropdown-item" href="#" [routerLink]="['/business']">Business</a>
+              <a class="dropdown-item disabled" href="#">Entertainment</a>
+              <a class="dropdown-item" href="#" [routerLink]="['/sports']">Sports</a>
+              <a class="dropdown-item" href="#" [routerLink]="['/science']">Science</a>
+              <a class="dropdown-item" href="#" [routerLink]="['/technology']">Technology</a>
+              <a class="dropdown-item" href="#" [routerLink]="['/health']">Health</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <!--ng template is used to show bootstrap spinner till the cards are loaded-->
+      <ng-template #loading>
+        <div style="text-align: center">
+          <div class="spinner-border" style="text-align: center" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </ng-template>
+      <!--
+  <div class="card-group" *ngFor = "let line of headlines">
+      <div class="card bg-light mb-3">
+        <div class="card-header"><b>News Provider : {{line.source.name}}</b></div>
+        <a href="{{line.url}}"><img class="card-img-top" src="{{line.urlToImage}}" alt="Card image cap"></a>
+        <div class="card-body">
+          <h5 class="card-title">{{line.title}}</h5>
+          <p class="card-text">{{line.description}}</p>
+          <p class="card-text">{{line.content}}</p>
+          <p><small class="text-muted">Published at : {{line.publishedAt}}</small></p>
+        </div>
+      </div>
+      
+      
+    </div>-->
+      <!--if headlines object isnt fetched then the spinner will keep on spinning-->
+      <div class="row ml-1 mr-1" *ngIf="headlines; else loading">
+        <div class="col-md-4 mb-5" *ngFor="let line of headlines">
+          <div class="card-deck">
+            <div class="card  bg-light">
+              <div class="card-header">{{line.source.name}}</div>
+              <img class="card-img-top" src="{{line.urlToImage}}" alt="image unavailable from {{line.source.name}}">
+              <div class="card-body">
+                <h5 class="card-title" style="text-align:justify">{{line.title}}</h5>
+                <p class="card-text" style="text-align: justify">{{line.description}}</p>
+                <!--<p class="card-text">{{line.content|slice:0:-13}}</p>-->
+                <a href="{{line.url}}" class="btn btn-primary rounded-pill" style="display:block;white-space: nowrap;
+            text-align: center">View full story here</a>
+              </div>
+              <!--date:'medium' is one of the angular pipes to convert utc time to user readable form-->
+              <div class="card-footer text-muted">Published on : {{line.publishedAt|date:'medium'}}</div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+
+    </div>
+  </div>
+</div>
